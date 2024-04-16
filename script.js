@@ -5,6 +5,7 @@ const resetButton = document.getElementById('resetButton');
 const showAnswersButton = document.getElementById('showAnswersButton');
 const categoryButtons = document.querySelectorAll('#categories button');
 
+
 let currentCategory = 'category1'; // Select initial category
 let wordData = {
     category1: [
@@ -82,7 +83,7 @@ let activeWord = null;
 let activeDefinition = null; 
 let colorIndex = 0; // To keep track of colors
 const highlightColors = [
-    'yellow', 
+    'green', 
     'lightblue', 
     'pink', 
     'lightgreen',
@@ -90,6 +91,7 @@ const highlightColors = [
     'magenta',    // Another color
     '#CAE1FF'     // Example using hex code
 ]; 
+let usedDefinitions = []; // Keep track of used definitions
 
 
 function handleClickWord(event) {
@@ -113,6 +115,12 @@ function handleClickDefinition(event) {
         activeDefinition.classList.remove('highlighted');
     }
 
+    //NEW
+    if (usedDefinitions.includes(clickedDefinitionBox.textContent)) {
+      return; // Do nothing if the definition has been used already
+    }
+    //NEW
+
     // If we have a selected word, attempt to connect
     if (activeWord) {
         // Apply dynamic color
@@ -125,15 +133,19 @@ function handleClickDefinition(event) {
 
         // Cycle to the next color
         colorIndex = (colorIndex + 1) % highlightColors.length; 
-//NEW
-activeWord.dataset.matchedWith = clickedDefinitionBox.textContent; // Store match attempt
-activeDefinition = clickedDefinitionBox; // Keep track of definition
-//NEW        
+        //NEW
+        activeWord.dataset.matchedWith = clickedDefinitionBox.textContent; // Store match attempt
+        activeDefinition = clickedDefinitionBox; // Keep track of definition
+        //NEW        
+
+        //NEW
+        activeWord = null; 
+        usedDefinitions.push(clickedDefinitionBox.textContent); // Mark as used
+        //NEW
     } 
 }
 
 
-//wow it works now
 function checkAnswers() {
     const allWordBoxes = document.querySelectorAll('.word-box');
   
@@ -184,6 +196,7 @@ function resetGame() {
   activeWord = null;
   activeDefinition = null;
   colorIndex = 0;
+  usedDefinitions = [];
 }
 
 
@@ -220,9 +233,6 @@ function showAnswers() {
   
   
 
-
-
-
 // Event listeners
 categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -233,9 +243,18 @@ categoryButtons.forEach(button => {
 checkButton.addEventListener('click', checkAnswers);
 resetButton.addEventListener('click', resetGame);
 showAnswersButton.addEventListener('click', showAnswers);
+//NEW
+wordColumn.addEventListener('click', function(event) {
+  if (event.target.classList.contains('word-box')) {
+    handleClickWord(event);
+  }
+});
 
-wordColumn.addEventListener('click', handleClickWord);
-definitionColumn.addEventListener('click', handleClickDefinition);
-
+definitionColumn.addEventListener('click', function(event) {
+  if (event.target.classList.contains('word-box')) {
+    handleClickDefinition(event);
+  }
+});
+//NEW
 // Initialize
 loadWords(); 
