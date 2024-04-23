@@ -56,6 +56,36 @@ body {
   cursor: pointer;
   z-index: 20; /* Assign a higher z-index to the sidebar */
 }
+.hamburger-menu {
+  position: fixed; 
+  top: 15%; 
+  left: 0;
+  z-index: 10; 
+  background-color: transparent; /* No background */
+  border: none;                 /* Remove default border  */
+  padding: 10px 15px;           /* Some padding around the lines */
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 25px;           /* Width of the lines */
+  height: 3px;           /* Thickness of the lines */
+  background-color: white;  /* Color of the lines */
+  margin-bottom: 5px;    /* Space between the lines */
+}
+.hamburger-menu.open span:first-child {
+  transform: translateY(8px) rotate(45deg); /* Move and rotate the top line */
+}
+
+.hamburger-menu.open span:nth-child(2) {
+  opacity: 0;  /* Hide the middle line */
+}
+
+.hamburger-menu.open span:last-child {
+  transform: translateY(-8px) rotate(-45deg); /* Move and rotate the bottom line */
+}
+
 #sidebar button.active-category {
   background-color: #3377cc; /* Your existing hover background color */
 }

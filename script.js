@@ -18,6 +18,7 @@ const body = document.body;
 
 sidebarButton.addEventListener('click', () => {
   body.classList.toggle('sidebar-open');
+  sidebarButton.classList.toggle('open'); /* Assuming you add an 'open' class */
 });
 
 let currentCategory = 'category1'; // Select initial category
