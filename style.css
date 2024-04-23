@@ -1,22 +1,152 @@
-.container {
-  display: flex;
+body { 
+  display: flex; /* Allow side-by-side layout */
+  flex-direction: column; 
+}
+#header {
+  background-color: #F0F0F0;
+  padding: 15px;
+  top: 0;          /* Align the header to the very top */
+  width: 100%;     /* Header stretches across the full width */
 }
 
+/* Sidebar Styling */
+#sidebar {
+  background-color: #f0f0f0; 
+  padding: 1.5%; 
+  width: 15%;  
+  position: fixed; /* Changed from 'fixed' */ 
+  top: 20%;  
+  left: 0;
+  display: none; 
+  height: 70%; /* Add height to encourage scrolling */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  z-index: 20; /* Assign a higher z-index to the sidebar */
+  
+}
+.sidebar-open #sidebar {
+  display: block;  /* Show sidebar when 'sidebar-open' is on the 'body' */
+}
+#sidebar button {
+  display: block;      /* Make buttons full-width within the sidebar */
+  width: 100%;         /* Make buttons full width */
+  margin-bottom: 10px; /* Add spacing between buttons */
+  padding: 10px;
+  border: none;        /* Remove default button borders */
+  background-color: #4488ff; /* A sample color */
+  color: white;  
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;    /* Left-align button text */  
+}
+
+#sidebar button:hover { /* Optional hover effect */
+  background-color: #3377cc; 
+}
+#openSidebarButton {
+  position: fixed; /* Keep the button fixed on the screen */
+  top: 15%;   /* Vertically center the button */
+  transform: translateY(-50%); /* Adjust vertical placement if needed */
+  left: 0;    /* Snap the button to the left side */
+  padding: 10px 20px;  /* Maintain your existing button padding */
+  background-color: #4488ff; /* Your existing button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 20; /* Assign a higher z-index to the sidebar */
+}
+#sidebar button.active-category {
+  background-color: #3377cc; /* Your existing hover background color */
+}
+.container {
+  flex: 1;  
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: flex-end; /* Align items to the right  */
+  width: 80%; 
+  margin-left: auto;  /* Push the container to the right */
+  position: relative; /* Allows absolute positioning of children */
+}
 .column {
   flex: 1;
-  margin: 10px;
-  padding: 15px;
+  margin: 1%;
+  padding: 1.5%;
   border: 1px solid #ccc;
+  border-radius: 5px; /* Slightly round the corners */
+  width: 45%; /* Each column takes up 45% of the container  */
 }
-
-.word-box {
+#controls {
+  position: relative; /* Allows absolute positioning of children */
+  left: 80%;    /* Adjust distance from the right as needed */
+  z-index: 10; /* Ensure the button appears above other elements */
+}
+/* .word-box {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   cursor: pointer;
-  background-color: #f0f0f0; /* Light gray background */
+  background-color: #f0f0f0;
+} */
+
+.word-box {
+  display: flex; /* Allow placing items side-by-side */
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Put space between the word and translation */
+  padding: 10px 15px; /* Add some padding for visual clarity */
+  border: 2px solid #ccc;
+  border-radius: 5px; /* Slightly round the corners */
+  cursor: pointer;
+  background-color: #f0f0f0;
+  margin-bottom: 10px; 
+  font-size: 18px; 
 }
 
 .highlighted {
   background-color: yellow; 
 }
+
+button {
+  padding: 10px 20px;
+  background-color: #4488ff; /* A sample color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px auto;
+}
+
+@media (max-width: 768px) { 
+    .container {
+        flex-direction: column; /* Stack columns on smaller screens */
+        z-index: 10; /* Assign a slightly lower z-index to the container */
+        position: sticky;
+        top: 25%;
+    }
+
+    .column {
+        width: 80%; /* Columns occupy more width on smaller screens */
+        margin: 10px auto;
+    }
+    #sidebar {
+      width: 40%;  /* Increase the sidebar width for small screens */
+    }
+    #openSidebarButton {
+      position: fixed;
+    }
+
+    #controls{
+      flex-direction: column; /* Stack columns on smaller screens */
+      position: fixed;
+      bottom:0;
+      left: 0;    /* Adjust distance from the right as needed */
+    }
+
+}
+
+/* img {
+  max-width: 100%; 
+  height: auto; 
+} */
+
+
