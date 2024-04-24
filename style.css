@@ -1,13 +1,19 @@
 body { 
   display: flex; /* Allow side-by-side layout */
   flex-direction: column; 
+  background-color: #ffffff;  
+  overflow-x: hidden; 
 }
 #header {
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center;  /* Align items vertically */
   background-color: #F0F0F0;
   padding: 15px;
   top: 0;          /* Align the header to the very top */
   width: 100%;     /* Header stretches across the full width */
 }
+
 
 /* Sidebar Styling */
 #sidebar {
@@ -15,16 +21,16 @@ body {
   padding: 1.5%; 
   width: 15%;  
   position: fixed; /* Changed from 'fixed' */ 
-  top: 20%;  
-  left: 0;
-  display: none; 
-  height: 70%; /* Add height to encourage scrolling */
-  overflow-y: auto;  /* Enable vertical scrolling */
+  top: 22.5%;  
+  left: -30%; /* Hide it initially by shifting it to the left */
+  height: 78%; /* Add height to encourage scrolling */
   z-index: 20; /* Assign a higher z-index to the sidebar */
-  
+  transition: left 0.3s ease-out; /* Add a smooth transition */
+
 }
 .sidebar-open #sidebar {
-  display: block;  /* Show sidebar when 'sidebar-open' is on the 'body' */
+  left: 0; /* Slide it in from the left */
+  overflow-y: auto;  /* Enable vertical scrolling */
 }
 #sidebar button {
   display: block;      /* Make buttons full-width within the sidebar */
@@ -45,7 +51,7 @@ body {
 }
 #openSidebarButton {
   position: fixed; /* Keep the button fixed on the screen */
-  top: 15%;   /* Vertically center the button */
+  top: 17.5%;   /* Vertically center the button */
   transform: translateY(-50%); /* Adjust vertical placement if needed */
   left: 0;    /* Snap the button to the left side */
   padding: 10px 20px;  /* Maintain your existing button padding */
@@ -87,8 +93,22 @@ body {
 }
 
 #sidebar button.active-category {
-  background-color: #3377cc; /* Your existing hover background color */
+  background-color: #214c82; /* Your existing hover background color */
 }
+
+#openSidebarButton:hover, 
+.hamburger-menu:hover { 
+    background-color: #336699; /* Slightly darker on hover */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); 
+}
+
+/* Toggle Dark Mode Button Hover */
+#toggleDarkMode:hover {
+    background-color: #ffc45e; /* Slightly darken the yellow color */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); 
+}
+
+
 .container {
   flex: 1;  
   display: flex;
@@ -108,16 +128,14 @@ body {
 }
 #controls {
   position: relative; /* Allows absolute positioning of children */
-  left: 80%;    /* Adjust distance from the right as needed */
+  left: 75%;    /* Adjust distance from the right as needed */
   z-index: 10; /* Ensure the button appears above other elements */
 }
-/* .word-box {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  background-color: #f0f0f0;
-} */
+
+#controls button:hover {
+  background-color: #3C6997; /* Slightly darker on hover */
+  cursor: pointer;  /* Standard 'hand' cursor */
+}
 
 .word-box {
   display: flex; /* Allow placing items side-by-side */
@@ -130,6 +148,11 @@ body {
   background-color: #f0f0f0;
   margin-bottom: 10px; 
   font-size: 18px; 
+}
+
+.word-box:hover {
+  background-color: #e8e8e8; /* A slightly lighter color on hover */
+  cursor: pointer; /* Change cursor to indicate interactivity */
 }
 
 .highlighted {
@@ -146,7 +169,119 @@ button {
   margin: 10px auto;
 }
 
+
+.dark-mode body {
+  background-color: #333; /* Dark background */
+  color: #f0f0f0;         /* Light text */
+}
+
+.dark-mode #header {
+  background-color: #222; /* Darker header */
+  color: white;
+}
+
+.dark-mode #sidebar {
+  background-color: #282828; /* Darker sidebar */
+}
+
+.dark-mode button {
+  background-color: #205081; /* Darker button color */
+  color: white;
+}
+
+.dark-mode #sidebar {
+  background-color: #282828; 
+}
+
+.dark-mode button { /* Will affect buttons generally, including in the sidebar  */
+  background-color: #205081; 
+  color: white;
+}
+
+.dark-mode .container {
+  background-color: #404040; /* Darker color for the container */
+}
+
+.dark-mode .column {
+  background-color: #383838; /* Darker color for the columns */
+  border-color: #505050;  /* Darker border */
+}
+
+.dark-mode .word-box {
+  background-color: #454545; /* Darker color for word boxes */
+  border-color: #686868;  /* Darker border color */
+  color: #f0f0f0;        /*  Light text color for contrast */
+}
+
+.dark-mode .word-box:hover {
+  background-color: #505050; /* Slightly darker color in dark mode */
+}
+
+.dark-mode #sidebar button {
+  background-color: #205081; /* Darker button color */
+  color: white;              /* Light text color */
+}
+
+.dark-mode #sidebar button.active-category {
+  background-color: #4571be; /* A darker color suitable for dark mode */
+}
+
+#sidebar button:hover {
+  background-color: #306090; /* A slightly darker hover color */
+}
+
+.dark-mode .highlighted {
+  background-color: #5588bb; /* A contrasting highlight color for dark mode */
+}
+
+#toggleDarkMode { 
+  position: sticky;  /* Fix the button to a specific viewport location */
+  top: 7.5%;  /* Vertical positioning from the top */
+  transform: translateY(-50%); /* Adjust vertical placement if needed */
+  left: 99%;  /* Snap the button 10px from the right edge */
+  background-color: #FFDC00; /* A distinct color */
+  color: black; 
+  border-radius: 8px; /* Slightly round the corners */
+  padding: 8px 15px;
+  font-size: 24px; 
+}
+
+/* Optional: Dark Mode Styles */
+.dark-mode #toggleDarkMode {
+  background-color: #835302; /* Slightly different color in dark mode*/
+}
+
+/* Optional: Dark Mode Toggle Hover */
+.dark-mode #toggleDarkMode:hover {
+  background-color: #8f6000; /* Adjust if you want a distinct change */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Darker shadow */
+}
+
+.dark-mode h1,
+.dark-mode button {  /* Target buttons if desired */
+  text-shadow: 
+    2px 2px 2px #000000,  /* Black shadow offset slightly */
+    0 0 1px white;       /* Inner white glow for contrast */
+}
+
+body.dark-mode { /* Target body explicitly when in dark mode */
+  background-color: #333; 
+  text-shadow: 
+  2px 2px 2px #000000,  /* Black shadow offset slightly */
+  0 0 1px white;       /* Inner white glow for contrast */
+}
+
+
 @media (max-width: 768px) { 
+  
+    .sidebar-open #sidebar {
+      width: 50%; /* Sidebar takes up 80% of screen width */
+    }
+
+    .sidebar-open main {
+      margin-left: 50%; /* Adjust the margin accordingly */
+    }
+
     .container {
         flex-direction: column; /* Stack columns on smaller screens */
         z-index: 10; /* Assign a slightly lower z-index to the container */
@@ -158,14 +293,15 @@ button {
         width: 80%; /* Columns occupy more width on smaller screens */
         margin: 10px auto;
     }
-    #sidebar {
-      width: 40%;  /* Increase the sidebar width for small screens */
-    }
+
     #openSidebarButton {
       position: fixed;
     }
 
     #controls{
+      flex: 1;  
+      display: flex;
+      flex-wrap: wrap; 
       flex-direction: column; /* Stack columns on smaller screens */
       position: fixed;
       bottom:0;
@@ -173,10 +309,4 @@ button {
     }
 
 }
-
-/* img {
-  max-width: 100%; 
-  height: auto; 
-} */
-
 
