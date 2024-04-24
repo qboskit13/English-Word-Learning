@@ -23,7 +23,7 @@ body {
   position: fixed; /* Changed from 'fixed' */ 
   top: 22.5%;  
   left: -30%; /* Hide it initially by shifting it to the left */
-  height: 78%; /* Add height to encourage scrolling */
+  height: 70%; /* Add height to encourage scrolling */
   z-index: 20; /* Assign a higher z-index to the sidebar */
   transition: left 0.3s ease-out; /* Add a smooth transition */
 
@@ -130,6 +130,7 @@ body {
   position: relative; /* Allows absolute positioning of children */
   left: 75%;    /* Adjust distance from the right as needed */
   z-index: 10; /* Ensure the button appears above other elements */
+  user-select: none; 
 }
 
 #controls button:hover {
@@ -158,7 +159,10 @@ body {
 .highlighted {
   background-color: yellow; 
 }
-
+.word-box.highlighted:hover {
+  background-color: inherit; /* Prevent background color change on hover */
+  cursor: default;          /* Use the default cursor */
+}
 button {
   padding: 10px 20px;
   background-color: #4488ff; /* A sample color */
@@ -216,7 +220,10 @@ button {
 .dark-mode .word-box:hover {
   background-color: #505050; /* Slightly darker color in dark mode */
 }
-
+.dark-mode .word-box.highlighted:hover {
+  background-color: inherit; /* Prevent background color change on hover */
+  cursor: default;          /* Use the default cursor */
+}
 .dark-mode #sidebar button {
   background-color: #205081; /* Darker button color */
   color: white;              /* Light text color */
@@ -270,7 +277,6 @@ body.dark-mode { /* Target body explicitly when in dark mode */
   2px 2px 2px #000000,  /* Black shadow offset slightly */
   0 0 1px white;       /* Inner white glow for contrast */
 }
-
 
 @media (max-width: 768px) { 
   

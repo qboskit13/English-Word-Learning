@@ -18,6 +18,9 @@ const sidebarButton = document.getElementById('openSidebarButton'); // Assuming 
 
 const toggleDarkModeButton = document.getElementById('toggleDarkMode');
 
+const nextCategoryButton = document.getElementById('nextCategoryButton');
+
+const previousCategoryButton = document.getElementById('previousCategoryButton');
 
 // Initial theme setup (Optional but recommended)
 const storedTheme = localStorage.getItem('theme');
@@ -285,7 +288,7 @@ category16: [
 
 
 function loadWords() {
-  
+    
     // Clear existing content
     wordColumn.innerHTML = '';
     definitionColumn.innerHTML = '';
@@ -314,6 +317,10 @@ function loadWords() {
         definitionBox.addEventListener('click', handleClickDefinition);
         definitionColumn.appendChild(definitionBox);
     });
+    // Update the active category button in the sidebar
+    categoryButtons.forEach(btn => {
+      btn.classList.toggle('active-category', btn.dataset.category === currentCategory)  
+    });   
 }
 
 
@@ -541,8 +548,6 @@ toggleDarkModeButton.addEventListener('click', () => {
 });
 
 
-const nextCategoryButton = document.getElementById('nextCategoryButton');
-
 nextCategoryButton.addEventListener('click', () => {
   const categoryNames = Object.keys(wordData); // Get an array of category names
   const currentIndex = categoryNames.indexOf(currentCategory);
@@ -557,7 +562,6 @@ nextCategoryButton.addEventListener('click', () => {
   }); 
 });
 
-const previousCategoryButton = document.getElementById('previousCategoryButton');
 
 previousCategoryButton.addEventListener('click', () => {
   const categoryNames = Object.keys(wordData); // Get an array of category names
