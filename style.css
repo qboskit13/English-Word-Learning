@@ -237,6 +237,14 @@ button {
   background-color: #306090; /* A slightly darker hover color */
 }
 
+.dark-mode #openSidebarButton{
+  background-color: #205081; /* Darker button color */
+}
+.dark-mode #openSidebarButton:hover, 
+.hamburger-menu:hover { 
+    background-color: #306090; /* Slightly darker on hover */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); 
+}
 .dark-mode .highlighted {
   background-color: #5588bb; /* A contrasting highlight color for dark mode */
 }
@@ -245,7 +253,7 @@ button {
   position: sticky;  /* Fix the button to a specific viewport location */
   top: 7.5%;  /* Vertical positioning from the top */
   transform: translateY(-50%); /* Adjust vertical placement if needed */
-  left: 99%;  /* Snap the button 10px from the right edge */
+  left: 95%;  /* Snap the button 10px from the right edge */
   background-color: #FFDC00; /* A distinct color */
   color: black; 
   border-radius: 8px; /* Slightly round the corners */

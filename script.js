@@ -539,6 +539,11 @@ sidebarButton.addEventListener('click', () => {
 
 toggleDarkModeButton.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
+  const buttonText = toggleDarkModeButton.querySelector('span'); // Target the <span>
+
+  // Toggle text content
+  buttonText.textContent = body.classList.contains('dark-mode') ? '🌙' : '☀️'; 
+
   // Optional: Store the preference in localStorage
   if (body.classList.contains('dark-mode')) {
       localStorage.setItem('theme', 'dark');
